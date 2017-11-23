@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
 
 import { AppComponent } from './app.component';
@@ -16,10 +16,8 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { AppRoutingModule } from './app-routing.module';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { RecipeService } from './recipes/recipes.service';
-import { DataStorageService } from './shared/data-storage.service';
+import { RecipeService } from './services/recipes.service';
 
-// Are these needed?????????????
 import { UserService } from './services/user.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -48,8 +46,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   providers: [
     UserService,
     ShoppingListService,
-    RecipeService,
-    DataStorageService
+    RecipeService
   ],
   bootstrap: [AppComponent]
 })
