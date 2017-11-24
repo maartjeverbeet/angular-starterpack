@@ -18,7 +18,7 @@ export class RecipeService {
     return this.http.get(environment.serverUrl + '/recipes', { headers: this.headers })
       .toPromise()
       .then(response => {
-        this.recipes = response.json().recipe as Recipe[];
+        this.recipes = response.json() as Recipe[];
         console.dir(response.json());
         return response.json() as Recipe[];
       })
