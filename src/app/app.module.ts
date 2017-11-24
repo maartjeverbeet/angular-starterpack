@@ -18,7 +18,6 @@ import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.compon
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeService } from './services/recipes.service';
 
-import { UserService } from './services/user.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -44,7 +43,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule
   ],
   providers: [
-    UserService,
     ShoppingListService,
     RecipeService
   ],
