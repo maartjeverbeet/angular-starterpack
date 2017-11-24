@@ -10,7 +10,7 @@ import { ShoppingListService } from '../shopping-list/shopping-list.service';
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
   private headers = new Headers({ 'Content-Type': 'application/json' });
-  private recipes: Recipe[] = [];
+  private recipes: Recipe[];
 
   constructor(private slService: ShoppingListService, private http: Http) {}
 
@@ -18,6 +18,7 @@ export class RecipeService {
     return this.http.get(environment.serverUrl + '/recipes', { headers: this.headers })
       .toPromise()
       .then(response => {
+        this.recipes = response.json().recipe as Recipe[];
         console.dir(response.json());
         return response.json() as Recipe[];
       })
@@ -26,7 +27,7 @@ export class RecipeService {
       });
   }
 
-  getRecipe(index: number) {
+  getRecipe(index: string) {
     return this.http.get(environment.serverUrl + '/recipes/' + index, { headers: this.headers })
       .toPromise()
       .then(response => {
@@ -46,29 +47,29 @@ export class RecipeService {
     this.http.post(environment.serverUrl + '/recipes', { recipe }, { headers: this.headers })
       .toPromise()
       .then(response => {
-        console.dir(response.json());
+        this.recipesChanged.next(this.recipes.slice());
       })
       .catch(error => {
         return this.handleError(error);
       });
   }
 
-  updateRecipe(index: number, newRecipe: Recipe) {
+  updateRecipe(index: string, newRecipe: Recipe) {
     this.http.put(environment.serverUrl + '/recipes/' + index, { newRecipe }, { headers: this.headers })
       .toPromise()
       .then(response => {
-        console.dir(response.json());
+        this.recipesChanged.next(this.recipes.slice());
       })
       .catch(error => {
         return this.handleError(error);
       });
   }
 
-  deleteRecipe(index: number) {
+  deleteRecipe(index: string) {
     this.http.delete(environment.serverUrl + '/recipes/' + index, { headers: this.headers })
       .toPromise()
       .then(response => {
-        console.dir(response.json());
+        this.recipesChanged.next(this.recipes.slice());
       })
       .catch(error => {
         return this.handleError(error);
