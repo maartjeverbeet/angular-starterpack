@@ -6,23 +6,4 @@
     <router-outlet></router-outlet>
   </div>
 </div>
-<div *ngIf="users" class="col-sm-6">
-  <table class="table table-hover">
-    <thead>
-    <tr>
-      <td>Nr</td>
-      <td>Naam</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let user of users, let i = index">
-      <td>{{i+1}}</td>
-      <td>{{user.name}}</td>
-    </tr>
-    </tbody>
-  </table>
-</div>
-<div *ngIf="!users">
-  Er zijn geen users gevonden.
-</div>
 
