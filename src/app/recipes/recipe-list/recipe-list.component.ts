@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Recipe } from '../recipes.model';
-import { RecipeService } from '../../services/recipes.service';
+import { RecipeService } from '../recipes.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -11,7 +11,7 @@ import { RecipeService } from '../../services/recipes.service';
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit, OnDestroy {
-  recipes: Recipe[] = [];
+  recipes: Recipe[];
   subscription: Subscription;
 
   constructor(private recipeService: RecipeService,
@@ -23,7 +23,10 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     this.subscription = this.recipeService.recipesChanged
       .subscribe(
         (recipes: Recipe[]) => {
-          this.recipes = recipes;
+          this.recipeService.getRecipes()
+          .then(res => {
+            this.recipes = res;
+          });
         }
       );
     this.recipeService.getRecipes()
