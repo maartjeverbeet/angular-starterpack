@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Recipe } from '../recipes.model';
-import { RecipeService } from '../recipes.service';
+import { RecipeService } from '../../services/recipes.service';
 
 @Component({
   selector: 'app-recipe-list',
