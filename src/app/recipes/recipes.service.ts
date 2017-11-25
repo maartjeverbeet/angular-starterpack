@@ -55,7 +55,7 @@ export class RecipeService {
   }
 
   updateRecipe(index: string, newRecipe: Recipe) {
-    this.http.put(environment.serverUrl + '/recipes/' + index, { newRecipe }, { headers: this.headers })
+    this.http.put(environment.serverUrl + '/recipes/' + index, newRecipe , { headers: this.headers })
       .toPromise()
       .then(response => {
         this.recipesChanged.next(this.recipes.slice());
