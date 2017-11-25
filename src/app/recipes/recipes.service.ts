@@ -44,7 +44,7 @@ export class RecipeService {
   }
 
   addRecipe(recipe: Recipe) {
-    this.http.post(environment.serverUrl + '/recipes', { recipe }, { headers: this.headers })
+    this.http.post(environment.serverUrl + '/recipes', recipe , { headers: this.headers })
       .toPromise()
       .then(response => {
         this.recipesChanged.next(this.recipes.slice());
