@@ -10,7 +10,7 @@ import { RecipeService } from '../recipes.service';
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent implements OnInit {
-  recipe: Recipe;
+  recipe: Recipe = new Recipe({imagePath: ''});
   id: string;
 
   constructor(private recipeService: RecipeService,
