@@ -1,7 +1,7 @@
 import { Ingredient } from '../shared/ingredient.model';
 
 export class Recipe {
-  private _id: string;
+  private id: string;
   private _name: string;
   private _description: string;
   private _imagePath: string;
@@ -11,12 +11,12 @@ export class Recipe {
     Object.assign(this, values);
   }
 
-  public get id(): string {
-    return this._id;
+  public get _id(): string {
+    return this.id;
   }
 
-  public set id(n: string) {
-    this._id = n;
+  public set _id(n: string) {
+    this.id = n;
   }
 
   public get name(): string {
