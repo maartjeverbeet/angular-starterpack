@@ -14,24 +14,10 @@ export class RecipeService {
 
   constructor(private slService: ShoppingListService, private http: Http) {}
 
-  getRecipes() {
-    return this.http.get(environment.serverUrl + '/recipes', { headers: this.headers })
-      .toPromise()
-      .then(response => {
-        this.recipes = response.json() as Recipe[];
-        console.dir(response.json());
-        return response.json() as Recipe[];
-      })
-      .catch(error => {
-        return this.handleError(error);
-      });
-  }
-
   getRecipe(index: string) {
     return this.http.get(environment.serverUrl + '/recipes/' + index, { headers: this.headers })
       .toPromise()
       .then(response => {
-        console.dir(response.json());
         return response.json() as Recipe;
       })
       .catch(error => {
@@ -39,9 +25,18 @@ export class RecipeService {
       });
   }
 
-  addIngredientsToShoppingList(ingredients: Ingredient[]) {
-    this.slService.addIngredients(ingredients);
+  getRecipes() {
+    return this.http.get(environment.serverUrl + '/recipes', { headers: this.headers })
+      .toPromise()
+      .then(response => {
+        this.recipes = response.json() as Recipe[];
+        return response.json() as Recipe[];
+      })
+      .catch(error => {
+        return this.handleError(error);
+      });
   }
+
 
   addRecipe(recipe: Recipe) {
     this.http.post(environment.serverUrl + '/recipes', recipe , { headers: this.headers })
@@ -74,6 +69,10 @@ export class RecipeService {
       .catch(error => {
         return this.handleError(error);
       });
+  }
+
+  addIngredientsToShoppingList(ingredients: Ingredient[]) {
+    this.slService.addIngredients(ingredients);
   }
 
   private handleError(error: any): Promise<any> {
