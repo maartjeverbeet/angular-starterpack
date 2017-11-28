@@ -18,13 +18,13 @@ export class ShoppingListService {
         .then(response => {
           console.dir(response.json());
           this.ingredients = response.json() as Ingredient[];
+          return this.ingredients.slice();
         })
         .catch(error => {
           this.ingredients = [new Ingredient('Error', 0)];
           return this.handleError(error);
         });
     }
-    return this.ingredients.slice();
   }
 
   getIngredient(index: number) {
