@@ -48,6 +48,7 @@ export class ShoppingListService {
 
   updateIngredient(index: number, newIngredient: Ingredient) {
     const id = this.ingredients[index]._id;
+    newIngredient.id = id;
     console.log('id: ' + id);
     console.log(newIngredient as Ingredient);
     console.log('ingredientname: ' + newIngredient._name);
