@@ -54,7 +54,7 @@ export class ShoppingListService {
     console.log(newIngredient as Ingredient);
     console.log('ingredientname: ' + newIngredient.name);
     console.log('ingredientamount: ' + newIngredient.amount);
-    this.http.put(environment.serverUrl + '/ingredients/' + id, {newIngredient} , { headers: this.headers })
+    this.http.put(environment.serverUrl + '/ingredients/' + id, newIngredient , { headers: this.headers })
       .toPromise()
       .then(response => {
         this.ingredientsChanged.next(this.ingredients.slice());
