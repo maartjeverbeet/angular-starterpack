@@ -30,6 +30,7 @@ export class ShoppingListService {
 
   addIngredient(ingredient: Ingredient) {
     console.log(ingredient as Ingredient);
+    ingredient._id = null;
     this.http.post(environment.serverUrl + '/ingredients', ingredient , { headers: this.headers })
       .toPromise()
       .then(response => {
@@ -50,10 +51,6 @@ export class ShoppingListService {
   updateIngredient(index: number, newIngredient: Ingredient) {
     const id = this.ingredients[index]._id;
     newIngredient._id = id;
-    console.log('id: ' + id);
-    console.log(newIngredient as Ingredient);
-    console.log('ingredientname: ' + newIngredient.name);
-    console.log('ingredientamount: ' + newIngredient.amount);
     this.http.put(environment.serverUrl + '/ingredients/' + id, newIngredient , { headers: this.headers })
       .toPromise()
       .then(response => {
