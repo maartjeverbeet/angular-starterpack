@@ -30,7 +30,7 @@ export class ShoppingListService {
 
   addIngredient(ingredient: Ingredient) {
     console.log(ingredient as Ingredient);
-    this.http.post(environment.serverUrl + '/ingredients', ingredient , { headers: this.headers })
+    this.http.post(environment.serverUrl + '/ingredients', [ingredient.name, ingredient.amount] , { headers: this.headers })
       .toPromise()
       .then(response => {
         this.ingredients.push(ingredient);
