@@ -7,7 +7,7 @@ export class ShoppingListService {
   ingredientsChanged = new Subject<Ingredient[]>();
   startedEditing = new Subject<number>();
   private headers = new Headers({ 'Content-Type': 'application/json' });
-  private ingredients: Ingredient[] = [];
+  private ingredients: Ingredient[];
 
   constructor(private http: Http) { }
 
@@ -17,6 +17,7 @@ export class ShoppingListService {
       .then(response => {
         console.dir(response.json());
         this.ingredients = response.json() as Ingredient[];
+        return response.json() as Ingredient[];
       })
       .catch(error => {
         return this.handleError(error);
