@@ -20,8 +20,15 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
       .subscribe(
         (ingredients: Ingredient[]) => {
           this.ingredients = ingredients;
+          this.slService.getIngredients()
+            .then(res => {
+              this.ingredients = res;
+            });
         }
       );
+    this.slService.getIngredients()
+      .then(ingredients => this.ingredients = ingredients)
+      .catch(error => console.log(error));
   }
 
   onEditItem(index: number) {

@@ -12,18 +12,16 @@ export class ShoppingListService {
   constructor(private http: Http) { }
 
   getIngredients() {
-    if (this.ingredients.length === 0) {
-      this.http.get(environment.serverUrl + '/ingredients', { headers: this.headers })
-        .toPromise()
-        .then(response => {
-          console.dir(response.json());
-          this.ingredients = response.json() as Ingredient[];
-          this.ingredientsChanged.next(this.ingredients.slice());
-        })
-        .catch(error => {
-          return this.handleError(error);
-        });
-    }
+    return this.http.get(environment.serverUrl + '/ingredients', { headers: this.headers })
+      .toPromise()
+      .then(response => {
+        console.dir(response.json());
+        this.ingredients = response.json() as Ingredient[];
+        this.ingredientsChanged.next(this.ingredients.slice());
+      })
+      .catch(error => {
+        return this.handleError(error);
+      });
   }
 
   getIngredient(index: number) {
