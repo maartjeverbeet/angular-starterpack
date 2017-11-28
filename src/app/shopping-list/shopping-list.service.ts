@@ -30,7 +30,7 @@ export class ShoppingListService {
 
   addIngredient(ingredient: Ingredient) {
     console.log(ingredient as Ingredient);
-    this.http.post(environment.serverUrl + '/ingredients', [ingredient.name, ingredient.amount] , { headers: this.headers })
+    this.http.post(environment.serverUrl + '/ingredients', { ingredient } , { headers: this.headers })
       .toPromise()
       .then(response => {
         this.ingredients.push(ingredient);
@@ -49,12 +49,12 @@ export class ShoppingListService {
 
   updateIngredient(index: number, newIngredient: Ingredient) {
     const id = this.ingredients[index]._id;
-    newIngredient.id = id;
+    newIngredient._id = id;
     console.log('id: ' + id);
     console.log(newIngredient as Ingredient);
-    console.log('ingredientname: ' + newIngredient._name);
-    console.log('ingredientamount: ' + newIngredient._amount);
-    this.http.put(environment.serverUrl + '/ingredients/' + id, newIngredient , { headers: this.headers })
+    console.log('ingredientname: ' + newIngredient.name);
+    console.log('ingredientamount: ' + newIngredient.amount);
+    this.http.put(environment.serverUrl + '/ingredients/' + id, {newIngredient} , { headers: this.headers })
       .toPromise()
       .then(response => {
         this.ingredientsChanged.next(this.ingredients.slice());
