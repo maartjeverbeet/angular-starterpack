@@ -17,7 +17,6 @@ export class ShoppingListService {
       .then(response => {
         console.dir(response.json());
         this.ingredients = response.json() as Ingredient[];
-        this.ingredientsChanged.next(this.ingredients.slice());
       })
       .catch(error => {
         return this.handleError(error);
