@@ -49,11 +49,12 @@ export class ShoppingListService {
   updateIngredient(index: number, newIngredient: Ingredient) {
     const id = this.ingredients[index]._id;
     console.log('id: ' + id);
-    console.log('ingredient: ' + newIngredient);
+    console.log(newIngredient as Ingredient);
+    console.log('ingredientname: ' + newIngredient._name);
+    console.log('ingredientamount: ' + newIngredient._amount);
     this.http.put(environment.serverUrl + '/ingredients/' + id, newIngredient , { headers: this.headers })
       .toPromise()
       .then(response => {
-        this.ingredients[index] = newIngredient;
         this.ingredientsChanged.next(this.ingredients.slice());
       })
       .catch(error => {
