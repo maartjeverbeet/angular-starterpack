@@ -29,7 +29,6 @@ export class ShoppingListService {
   }
 
   addIngredient(ingredient: Ingredient) {
-    console.log(ingredient as Ingredient);
     ingredient._id = null;
     this.http.post(environment.serverUrl + '/ingredients', ingredient , { headers: this.headers })
       .toPromise()

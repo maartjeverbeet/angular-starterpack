@@ -39,7 +39,6 @@ export class RecipeService {
 
 
   addRecipe(recipe: Recipe) {
-    console.log(recipe as Recipe);
     this.http.post(environment.serverUrl + '/recipes', recipe , { headers: this.headers })
       .toPromise()
       .then(response => {
