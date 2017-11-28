@@ -9,20 +9,21 @@ export class ShoppingListService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
   private ingredients: Ingredient[] = [];
 
-  constructor(private http: Http) {
-    this.http.get(environment.serverUrl + '/ingredients', { headers: this.headers })
-      .toPromise()
-      .then(response => {
-        console.dir(response.json());
-        this.ingredients = response.json() as Ingredient[];
-      })
-      .catch(error => {
-        this.ingredients = [new Ingredient('Error', 0)];
-        return this.handleError(error);
-      });
-  }
+  constructor(private http: Http) { }
 
   getIngredients() {
+    if (this.ingredients.length === 0) {
+      this.http.get(environment.serverUrl + '/ingredients', { headers: this.headers })
+        .toPromise()
+        .then(response => {
+          console.dir(response.json());
+          this.ingredients = response.json() as Ingredient[];
+        })
+        .catch(error => {
+          this.ingredients = [new Ingredient('Error', 0)];
+          return this.handleError(error);
+        });
+    }
     return this.ingredients.slice();
   }
 
