@@ -18,10 +18,9 @@ export class ShoppingListService {
         .then(response => {
           console.dir(response.json());
           this.ingredients = response.json() as Ingredient[];
-          return this.ingredients.slice();
+          this.ingredientsChanged.next(this.ingredients.slice());
         })
         .catch(error => {
-          this.ingredients = [new Ingredient('Error', 0)];
           return this.handleError(error);
         });
     }
@@ -50,7 +49,8 @@ export class ShoppingListService {
   }
 
   updateIngredient(index: number, newIngredient: Ingredient) {
-    this.http.put(environment.serverUrl + '/ingredients/' + index, newIngredient , { headers: this.headers })
+    const id = this.ingredients[index]._id;
+    this.http.put(environment.serverUrl + '/ingredients/' + id, newIngredient , { headers: this.headers })
       .toPromise()
       .then(response => {
         this.ingredients[index] = newIngredient;
@@ -63,7 +63,8 @@ export class ShoppingListService {
   }
 
   deleteIngredient(index: number) {
-    this.http.delete(environment.serverUrl + '/ingredients/' + index, { headers: this.headers })
+    const id = this.ingredients[index]._id;
+    this.http.delete(environment.serverUrl + '/ingredients/' + id, { headers: this.headers })
       .toPromise()
       .then(response => {
         this.ingredients.splice(index, 1);
